@@ -6,7 +6,9 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
-
+    dataBinding{
+        enabled = true
+    }
     defaultConfig {
         applicationId "by.bsuir.tabatatimer"
         minSdkVersion 23
