@@ -2,13 +2,16 @@ package by.bsuir.tabatatimer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import by.bsuir.tabatatimer.views.AddWorkoutFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -32,10 +35,25 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
+        navController.addOnDestinationChangedListener{ _, destination, _ ->
+            when (destination.id) {
+                R.id.addWorkoutFragment -> {
+                    bottomNav.visibility = View.GONE
+                    toolbar.visibility = View.GONE
+                }
+                else -> {
+                    bottomNav.visibility = View.VISIBLE
+                    toolbar.visibility = View.VISIBLE
+                }
+            }
+
+        }
+
         bottomNav.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
 }

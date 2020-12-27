@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.bsuir.tabatatimer.R
 import by.bsuir.tabatatimer.databinding.FragmentHomeBinding
+import by.bsuir.tabatatimer.utilities.HomeNavigation
 import by.bsuir.tabatatimer.utilities.InjectorUtils
 import by.bsuir.tabatatimer.viewmodels.HomeViewModel
+import by.bsuir.tabatatimer.views.adapters.SequencesAdapter
 
 class HomeFragment: Fragment(R.layout.fragment_home) {
     private lateinit var viewModel: HomeViewModel
@@ -36,6 +39,23 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_home)
+        val adapter = SequencesAdapter()
 
+        viewModel.dataSet.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
+        recyclerView.adapter = adapter
+
+        viewModel.navigation.observe(viewLifecycleOwner) {
+            when(it) {
+                HomeNavigation.HomeToEdit -> navigateToEdit()
+            }
+        }
+    }
+
+    private fun navigateToEdit() {
+        val action = HomeFragmentDirections.actionHomeFragmentToAddWorkoutFragment()
+        findNavController().navigate(action)
     }
 }

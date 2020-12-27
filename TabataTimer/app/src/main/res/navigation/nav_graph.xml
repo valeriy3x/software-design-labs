@@ -14,5 +14,14 @@
         android:id="@+id/homeFragment"
         android:name="by.bsuir.tabatatimer.views.HomeFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addWorkoutFragment"
+            app:destination="@id/addWorkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addWorkoutFragment"
+        android:name="by.bsuir.tabatatimer.views.AddWorkoutFragment"
+        android:label="fragment_addworkout"
+        tools:layout="@layout/fragment_addworkout" />
 </navigation>

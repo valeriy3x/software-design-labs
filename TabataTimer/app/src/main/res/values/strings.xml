@@ -2,4 +2,16 @@
     <string name="app_name">TabataTimer</string>
     <string name="home">Home</string>
     <string name="settings">Settings</string>
+    <string name="prepare">Prepare:</string>
+    <string name="work">Work:</string>
+    <string name="rest">Rest:</string>
+    <string name="cycles">Cycles:</string>
+    <string name="sets">Sets:</string>
+    <string name="rest_between_sets">Rest Between sets:</string>
+    <string name="cool_down">Cool Down:</string>
+    <string name="total">Total:</string>
+    <string name="intervals">intervals</string>
+    <string name="title">Title</string>
+    <string name="current_color">Current Color</string>
+    <string name="submit">Submit</string>
 </resources>
