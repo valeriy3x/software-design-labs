@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import by.bsuir.tabatatimer.views.AddWorkoutFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController

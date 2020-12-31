@@ -13,9 +13,7 @@ import by.bsuir.tabatatimer.R
 import by.bsuir.tabatatimer.databinding.FragmentAddworkoutBinding
 import by.bsuir.tabatatimer.utilities.InjectorUtils
 import by.bsuir.tabatatimer.viewmodels.EditWorkoutViewModel
-import com.jaredrummler.android.colorpicker.ColorPickerDialog
-import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
-import com.jaredrummler.android.colorpicker.ColorShape
+import yuku.ambilwarna.AmbilWarnaDialog
 
 class AddWorkoutFragment: Fragment(R.layout.fragment_addworkout) {
     private lateinit var viewModel: EditWorkoutViewModel
@@ -40,6 +38,26 @@ class AddWorkoutFragment: Fragment(R.layout.fragment_addworkout) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val button = view.findViewById<Button>(R.id.button_current_color)
+
+        button.setOnClickListener {
+            openColorPicker()
+        }
+    }
+
+    private fun openColorPicker() {
+        val colorPicker = AmbilWarnaDialog(context, R.color.purple_500,
+            object: AmbilWarnaDialog.OnAmbilWarnaListener {
+            override fun onCancel(dialog: AmbilWarnaDialog?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
+                viewModel.color = color
+            }
+
+        })
+
+        colorPicker.show()
     }
 
 
