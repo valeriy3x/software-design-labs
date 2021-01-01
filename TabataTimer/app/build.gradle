@@ -75,6 +75,8 @@ dependencies {
 //    kapt "android.arch.persistence.room:compiler:1.1.1"
     implementation 'androidx.room:room-rxjava2:2.2.6'
     androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 //    implementation "android.arch.persistence.room:rxjava2"
 
 

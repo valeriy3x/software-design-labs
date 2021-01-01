@@ -23,5 +23,15 @@
         android:id="@+id/addWorkoutFragment"
         android:name="by.bsuir.tabatatimer.views.AddWorkoutFragment"
         android:label="fragment_addworkout"
-        tools:layout="@layout/fragment_addworkout" />
+        tools:layout="@layout/fragment_addworkout" >
+        <action
+            android:id="@+id/action_addWorkoutFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+        <argument
+            android:name="sequence"
+            app:argType="by.bsuir.tabatatimer.data.viewdata.Sequence"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

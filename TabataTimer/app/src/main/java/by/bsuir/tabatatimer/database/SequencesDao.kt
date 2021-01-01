@@ -1,8 +1,6 @@
 package by.bsuir.tabatatimer.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import by.bsuir.tabatatimer.data.dbo.SequenceDbo
 import io.reactivex.Flowable
 
@@ -12,6 +10,13 @@ interface SequencesDao {
     @Query("SELECT * FROM sequences")
     fun getSequences(): Flowable<List<SequenceDbo>>
 
-    @Insert
-    fun insertAll(sequence: SequenceDbo)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(sequence: SequenceDbo)
+
+    @Update
+    fun update(sequence: SequenceDbo)
+
+    @Delete
+    fun delete(sequence: SequenceDbo)
+
 }

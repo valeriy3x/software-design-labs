@@ -7,5 +7,7 @@ import io.reactivex.Single
 
 interface Repository {
     fun getSequences(): Flowable<List<Sequence>>
-    fun insertAll(sequences: List<Sequence>)
+    fun insertSequence(sequence: Sequence)
+    fun deleteSequence(sequence: Sequence)
+    fun updateSequence(sequence: Sequence)
 }

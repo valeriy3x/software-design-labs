@@ -1,5 +1,5 @@
 package by.bsuir.tabatatimer.utilities
 
 enum class HomeNavigation {
-    HomeToEdit
+    HomeToEdit, EditToHome
 }

@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="sequence"
             type="by.bsuir.tabatatimer.data.viewdata.Sequence" />
@@ -27,9 +29,9 @@
             card_view:cardPreventCornerOverlap="false">
 
             <RelativeLayout
+                android:id="@+id/card_item_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/purple_500"
                 android:padding="8dp">
 
                 <TextView
@@ -39,6 +41,24 @@
                     android:text="@{sequence.title}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white" />
+
+                <ImageButton
+                    android:id="@+id/button_dropdown_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_menu"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentEnd="true" />
+
+                <ImageButton
+                    android:id="@+id/button_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_play"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="8dp"
+                    android:layout_toStartOf="@id/button_dropdown_menu"
+                    android:layout_alignParentTop="true"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -70,7 +90,8 @@
                         android:layout_below="@id/textView_work"
                         android:text='@{@string/rest + " " + sequence.restTime}'
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:visibility="@{sequence.restTime == 0 ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/textView_cycles"
@@ -88,7 +109,8 @@
                         android:layout_below="@id/textView_cycles"
                         android:text="@{@string/sets + ' ' + sequence.setsCount}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:visibility="@{sequence.setsCount == 0 ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/textView_rest_between_sets"
@@ -97,7 +119,8 @@
                         android:layout_below="@id/textView_sets"
                         android:text="@{@string/rest_between_sets + ' ' + sequence.restBetweenSets}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:visibility="@{sequence.restBetweenSets == 0 ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/textView_cool_down"
@@ -106,16 +129,18 @@
                         android:layout_below="@id/textView_rest_between_sets"
                         android:text="@{@string/cool_down + ' ' + sequence.coolDown}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/white"
+                        android:visibility="@{sequence.coolDown == 0 ? View.GONE : View.VISIBLE}" />
+
+                    <TextView
+                        android:id="@+id/textView_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_cool_down"
+                        android:text="@{@string/total + ' ' + Integer.toString((sequence.prepareTime != 0? 1: 0) +((1 + (sequence.restTime != 0? 1: 0) ) * sequence.cycles) * sequence.setsCount + (sequence.restBetweenSets != 0 ? (sequence.setsCount - 1) : 0) + (sequence.coolDown != 0 ? 1: 0)) + ' ' + @string/intervals}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/white" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/textView_total"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@id/textView_cool_down"-->
-<!--                        android:text="@{@string/total + ' ' + ' ' + @string/intervals}"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@color/white" />-->
                 </RelativeLayout>
 
             </RelativeLayout>

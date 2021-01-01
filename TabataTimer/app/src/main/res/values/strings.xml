@@ -14,4 +14,6 @@
     <string name="title">Title</string>
     <string name="current_color">Current Color</string>
     <string name="submit">Submit</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

@@ -9,7 +9,7 @@ import by.bsuir.tabatatimer.database.SequencesDao
 import io.reactivex.Flowable
 
 object RepositoryImpl: Repository {
-    val sequencesDao: SequencesDao = Room.databaseBuilder(TabataTimerApplication.applicationContext!!, AppDatabase::class.java, "tabata-base").build().provideDao()
+    private val sequencesDao: SequencesDao = TabataTimerApplication.database.provideDao()
 
     override fun getSequences(): Flowable<List<Sequence>> {
         return sequencesDao.getSequences()
@@ -19,8 +19,16 @@ object RepositoryImpl: Repository {
             }
     }
 
-    override fun insertAll(sequences: List<Sequence>) {
-        sequencesDao.insertAll(sequences[0].toSequenceDbo())
+    override fun insertSequence(sequence: Sequence) {
+        sequencesDao.insert(sequence.toSequenceDbo())
+    }
+
+    override fun deleteSequence(sequence: Sequence) {
+        sequencesDao.delete(sequence.toSequenceDbo())
+    }
+
+    override fun updateSequence(sequence: Sequence) {
+        sequencesDao.update(sequence.toSequenceDbo())
     }
 
     private fun SequenceDbo.toSequence() = Sequence(
