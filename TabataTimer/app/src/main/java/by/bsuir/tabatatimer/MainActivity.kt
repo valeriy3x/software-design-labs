@@ -1,22 +1,41 @@
 package by.bsuir.tabatatimer
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import by.bsuir.tabatatimer.views.AddWorkoutFragment
+import androidx.preference.PreferenceManager
+import by.bsuir.tabatatimer.utilities.LocaleHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+
+        val sizeCoef = sharedPreferences.getFloat(this.getString(R.string.size_key), 1.15f)
+        val configuration: Configuration = resources.configuration
+        configuration.fontScale = sizeCoef
+
+        val metrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(metrics)
+        metrics.scaledDensity = configuration.fontScale * metrics.density
+        baseContext.resources.updateConfiguration(configuration, metrics)
+
+
+
         setContentView(R.layout.activity_main)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)

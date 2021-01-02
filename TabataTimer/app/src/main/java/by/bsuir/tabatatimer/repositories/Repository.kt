@@ -10,4 +10,5 @@ interface Repository {
     fun insertSequence(sequence: Sequence)
     fun deleteSequence(sequence: Sequence)
     fun updateSequence(sequence: Sequence)
+    fun deleteAllSequences()
 }

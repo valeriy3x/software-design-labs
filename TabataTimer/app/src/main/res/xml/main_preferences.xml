@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreferenceCompat
+        android:key="@string/theme_key"
+        android:title="@string/theme_title"/>
+
+    <ListPreference
+        android:entries="@array/languages"
+        android:entryValues="@array/lang_vals"
+        android:dialogTitle="@string/list_langs_title"
+        android:title="@string/lang_title"
+        android:key="@string/lang_key"
+        android:defaultValue="true"/>
+
+    <ListPreference
+        android:key="@string/font_key"
+        android:title="@string/font_title"
+        android:defaultValue="true"
+        android:entries="@array/font_sizes"
+        android:entryValues="@array/font_sizes"
+        android:dialogTitle="@string/list_font_title"/>
+
+    <Preference
+        android:key="@string/delete_key"
+        android:title="@string/delete_title" />
+</PreferenceScreen>

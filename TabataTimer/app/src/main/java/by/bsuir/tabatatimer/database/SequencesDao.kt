@@ -19,4 +19,7 @@ interface SequencesDao {
     @Delete
     fun delete(sequence: SequenceDbo)
 
+    @Query("delete from sequences")
+    fun deleteAll()
+
 }

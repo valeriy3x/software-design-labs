@@ -31,6 +31,10 @@ object RepositoryImpl: Repository {
         sequencesDao.update(sequence.toSequenceDbo())
     }
 
+    override fun deleteAllSequences() {
+        TabataTimerApplication.database.clearAllTables()
+    }
+
     private fun SequenceDbo.toSequence() = Sequence(
         id, title, color, prepareTime, workTime, restTime, cycles, setsCount, restBetweenSets, coolDown
     )

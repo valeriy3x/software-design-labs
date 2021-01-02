@@ -77,6 +77,12 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:$roomVersion"
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    def preference_version = "1.1.1"
+
+    // Java language implementation
+    implementation "androidx.preference:preference:$preference_version"
+    // Kotlin
+    implementation "androidx.preference:preference-ktx:$preference_version"
 //    implementation "android.arch.persistence.room:rxjava2"
 
 

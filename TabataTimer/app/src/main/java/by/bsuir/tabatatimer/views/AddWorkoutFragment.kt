@@ -72,7 +72,7 @@ class AddWorkoutFragment: Fragment(R.layout.fragment_addworkout) {
         val colorPicker = AmbilWarnaDialog(context, defaultColor,
             object: AmbilWarnaDialog.OnAmbilWarnaListener {
             override fun onCancel(dialog: AmbilWarnaDialog?) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
