@@ -14,15 +14,20 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import by.bsuir.tabatatimer.utilities.LocaleHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val language =
+            sharedPreferences.getString(applicationContext.getString(R.string.lang_key), "en")
+        val configLang: Configuration = resources.configuration
+        configLang.setLocale(Locale(language))
+        resources.updateConfiguration(configLang, resources.displayMetrics)
+        super.onCreate(savedInstanceState)
 
 
         val sizeCoef = sharedPreferences.getFloat(this.getString(R.string.size_key), 1.15f)

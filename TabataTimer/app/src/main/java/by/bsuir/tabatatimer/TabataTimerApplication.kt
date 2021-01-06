@@ -5,11 +5,13 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import androidx.room.Room
 import by.bsuir.tabatatimer.database.AppDatabase
 import by.bsuir.tabatatimer.utilities.LocaleHelper
+import java.util.*
 
 
 class TabataTimerApplication : Application() {
@@ -44,9 +46,12 @@ class TabataTimerApplication : Application() {
     }
 
     private fun loadSettings() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val language =
             sharedPreferences.getString(applicationContext.getString(R.string.lang_key), "en")
-        LocaleHelper.setLocale(applicationContext, language)
+        val configLang: Configuration = resources.configuration
+        configLang.setLocale(Locale(language))
+        resources.updateConfiguration(configLang, resources.displayMetrics)
 
         val theme =
             sharedPreferences.getBoolean(applicationContext.getString(R.string.theme_key), false)

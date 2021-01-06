@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,8 @@ import by.bsuir.tabatatimer.TabataTimerApplication
 import by.bsuir.tabatatimer.utilities.InjectorUtils
 import by.bsuir.tabatatimer.utilities.LocaleHelper
 import by.bsuir.tabatatimer.viewmodels.SettingsViewModel
+import java.util.*
+
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -49,6 +52,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
 
+
+
     override fun onResume() {
         val themePreference: SwitchPreferenceCompat? = context?.let { findPreference(it.getString(R.string.theme_key)) }
 
@@ -67,11 +72,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         langPreference?.let { lang ->
             lang.setOnPreferenceChangeListener { _, newValue ->
-                activity?.let {
-                    LocaleHelper.setLocale(it, newValue.toString())
-                    activity?.finish()
-                    startActivity(Intent(it, MainActivity::class.java))
-                }
+//                activity?.let {
+//                    LocaleHelper.setLocale(it, newValue.toString())
+//                    activity?.finish()
+//                    startActivity(Intent(it, MainActivity::class.java))
+//                }
+                val configuration: Configuration? = TabataTimerApplication.applicationContext?.resources?.configuration
+                configuration?.setLocale(Locale(newValue as String))
+                resources.updateConfiguration(configuration, resources.displayMetrics)
+                activity?.recreate()
                 true
 
             }
@@ -103,8 +112,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 activity?.resources
                     ?.updateConfiguration(configuration, metrics)
 
-                val action = SettingsFragmentDirections.actionSettingsFragmentSelf()
-                findNavController().navigate(action)
+                activity?.recreate()
 
                 true
             }

@@ -7,7 +7,7 @@ object WorkoutResourceHelperImpl : WorkoutResourceHelper {
     private val applicationContext = TabataTimerApplication.applicationContext
 
     override val prepareString: String?
-        get() = applicationContext?.getString(R.string.prepare)
+        get() = applicationContext?.resources?.getString(R.string.prepare)
 
     override val workString: String?
         get() = applicationContext?.getString(R.string.work)
