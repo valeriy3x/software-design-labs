@@ -112,7 +112,7 @@ class WorkoutViewModel(private val repo: Repository) : ViewModel() {
     }
 
     companion object {
-        private val globalErrorMessage = context.getString(R.string.workout_error)
+        private val globalErrorMessage = TabataTimerApplication.applicationContext?.getString(R.string.workout_error)
     }
 }
 
