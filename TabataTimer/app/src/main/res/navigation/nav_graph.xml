@@ -22,10 +22,19 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_addWorkoutFragment"
-            app:destination="@id/addWorkoutFragment" />
+            app:destination="@id/addWorkoutFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
         <action
             android:id="@+id/action_homeFragment_to_workoutFragment"
-            app:destination="@id/workoutFragment" />
+            app:destination="@id/workoutFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom"
+            />
     </fragment>
     <fragment
         android:id="@+id/addWorkoutFragment"
@@ -35,7 +44,11 @@
         <action
             android:id="@+id/action_addWorkoutFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment" />
+            app:popUpTo="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top"/>
         <argument
             android:name="sequence"
             app:argType="by.bsuir.tabatatimer.data.viewdata.Sequence"
@@ -54,7 +67,12 @@
             android:id="@+id/action_workoutFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top"
+            />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -62,6 +80,9 @@
         android:label="SplashFragment" >
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
