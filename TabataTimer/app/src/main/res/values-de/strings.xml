@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TabataTimer</string>
+    <string name="app_name">Tabata Timer</string>
     <string name="home">Zuhause</string>
     <string name="settings">Einstellungen</string>
     <string name="prepare">Vorbereiten:</string>

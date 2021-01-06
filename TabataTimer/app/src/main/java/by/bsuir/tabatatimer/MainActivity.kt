@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
         navController.addOnDestinationChangedListener{ _, destination, _ ->
             when (destination.id) {
-                R.id.addWorkoutFragment, R.id.workoutFragment -> {
+                R.id.addWorkoutFragment, R.id.workoutFragment, R.id.splashFragment -> {
                     bottomNav.visibility = View.GONE
                     toolbar.visibility = View.GONE
                 }
