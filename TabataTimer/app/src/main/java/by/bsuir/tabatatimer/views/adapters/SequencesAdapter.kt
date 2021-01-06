@@ -15,9 +15,11 @@ class SequencesAdapter :
     ListAdapter<Sequence, SequencesAdapter.SequencesViewHolder>(SequencesDiffUtilCallback()) {
 
     var listener: PopUpMenuManager<Sequence>? = null
+    var playListener: ImageButtonManager<Sequence>? = null
 
 
-    class SequencesViewHolder(private val binding: ItemSequenceBinding, private val listener: PopUpMenuManager<Sequence>?) :
+    class SequencesViewHolder(private val binding: ItemSequenceBinding, private val listener: PopUpMenuManager<Sequence>?,
+    private val playListener: ImageButtonManager<Sequence>?) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(sequence: Sequence) {
@@ -27,6 +29,9 @@ class SequencesAdapter :
             binding.buttonDropdownMenu.setOnClickListener {
                 listener?.showPopUp(it, sequence)
             }
+            binding.buttonPlay.setOnClickListener{
+                playListener?.play(sequence)
+            }
         }
     }
 
@@ -34,7 +39,7 @@ class SequencesAdapter :
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding = ItemSequenceBinding.inflate(layoutInflater, parent, false)
 
-        return SequencesViewHolder(itemBinding, listener)
+        return SequencesViewHolder(itemBinding, listener, playListener)
     }
 
     override fun onBindViewHolder(holder: SequencesViewHolder, position: Int) {

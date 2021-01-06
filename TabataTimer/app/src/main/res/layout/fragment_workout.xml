@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="by.bsuir.tabatatimer.viewmodels.WorkoutViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_workout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.WorkoutFragment">
+
+        <TextView
+            android:id="@+id/textView_step_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:text="@{viewmodel.currentStep}"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toTopOf="@id/listView"
+            app:layout_constraintEnd_toStartOf="@+id/textView_remaining_time_workout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_remaining_time_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{viewmodel.currentTime}"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView_step_workout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView_step_workout" />
+
+        <ImageButton
+            android:id="@+id/imageButton_previous_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:onClick="@{() -> viewmodel.prevStep()}"
+            android:src="@drawable/ic_previous"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton_stop_start_workout"
+            app:layout_constraintEnd_toStartOf="@id/imageButton_stop_start_workout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageButton_stop_start_workout" />
+
+        <ImageButton
+            android:id="@+id/imageButton_next_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:onClick="@{() -> viewmodel.nextStep()}"
+            android:src="@drawable/ic_next"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton_stop_start_workout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageButton_stop_start_workout"
+            app:layout_constraintTop_toTopOf="@+id/imageButton_stop_start_workout" />
+
+        <ImageButton
+            android:id="@+id/imageButton_stop_start_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48sp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:onClick="@{() -> viewmodel.pauseWorkout()}"
+            android:src="@{viewmodel.running? @drawable/ic_pause : @drawable/ic_start}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton_next_workout"
+            app:layout_constraintStart_toEndOf="@+id/imageButton_previous_workout"
+            app:layout_constraintTop_toBottomOf="@id/listView" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageButton_stop_start_workout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_step_workout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

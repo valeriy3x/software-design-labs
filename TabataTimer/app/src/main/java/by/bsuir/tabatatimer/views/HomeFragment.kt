@@ -13,6 +13,7 @@ import by.bsuir.tabatatimer.databinding.FragmentHomeBinding
 import by.bsuir.tabatatimer.utilities.HomeNavigation
 import by.bsuir.tabatatimer.utilities.InjectorUtils
 import by.bsuir.tabatatimer.viewmodels.HomeViewModel
+import by.bsuir.tabatatimer.views.adapters.ImageButtonManager
 import by.bsuir.tabatatimer.views.adapters.PopUpMenuManager
 import by.bsuir.tabatatimer.views.adapters.SequencesAdapter
 
@@ -61,6 +62,13 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                 val inflater: MenuInflater = popup.menuInflater
                 inflater.inflate(R.menu.menu_sequence, popup.menu)
                 popup.show()
+            }
+        }
+
+        adapter.playListener = object : ImageButtonManager<Sequence> {
+            override fun play(model: Sequence) {
+                val action = HomeFragmentDirections.actionHomeFragmentToWorkoutFragment(model)
+                findNavController().navigate(action)
             }
         }
 
