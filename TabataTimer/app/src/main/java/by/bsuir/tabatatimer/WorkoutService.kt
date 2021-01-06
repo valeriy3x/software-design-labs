@@ -1,12 +1,10 @@
 package by.bsuir.tabatatimer
 
-import android.app.NotificationChannel
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
-import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
@@ -32,21 +30,10 @@ class WorkoutService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         durations = intent?.getIntegerArrayListExtra(broadcastDurationsExtra)
         steps = intent?.getStringArrayListExtra(broadcastStepsExtra)
-        val seq = intent?.getParcelableExtra<Sequence>("sequence")
-        val bundle = Bundle()
-        bundle.putParcelable("sequence", seq)
-
-        val pendingIntent = NavDeepLinkBuilder(this)
-            .setComponentName(MainActivity::class.java)
-            .setGraph(R.navigation.nav_graph)
-            .setDestination(R.id.workoutFragment)
-            .setArguments(bundle)
-            .createPendingIntent()
 
         val notification = NotificationCompat.Builder(this, TabataTimerApplication.notificationChannelId)
             .setContentTitle("Workout is Running")
             .setSmallIcon(R.drawable.ic_timer)
-//            .setContentIntent(pendingIntent) TODO(Fix)
             .build()
 
         startForeground(1, notification)

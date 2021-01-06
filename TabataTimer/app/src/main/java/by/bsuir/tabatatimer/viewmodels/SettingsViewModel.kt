@@ -2,9 +2,10 @@ package by.bsuir.tabatatimer.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import by.bsuir.tabatatimer.R
+import by.bsuir.tabatatimer.TabataTimerApplication
 import by.bsuir.tabatatimer.repositories.Repository
 import io.reactivex.Completable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -33,6 +34,6 @@ class SettingsViewModel(private val repo: Repository): ViewModel() {
     }
 
     companion object {
-        private const val successMessage = "All your data have been successfully deleted"
+        private val successMessage = TabataTimerApplication.applicationContext?.getString(R.string.success_delete)
     }
 }

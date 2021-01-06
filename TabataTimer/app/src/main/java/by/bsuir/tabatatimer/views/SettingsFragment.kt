@@ -1,33 +1,21 @@
 package by.bsuir.tabatatimer.views
 
-import android.content.Context.WINDOW_SERVICE
-import android.content.DialogInterface
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
-
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.preference.*
-import by.bsuir.tabatatimer.MainActivity
 import by.bsuir.tabatatimer.R
 import by.bsuir.tabatatimer.TabataTimerApplication
 import by.bsuir.tabatatimer.utilities.InjectorUtils
-import by.bsuir.tabatatimer.utilities.LocaleHelper
 import by.bsuir.tabatatimer.viewmodels.SettingsViewModel
 import java.util.*
-
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -51,11 +39,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     }
 
-
-
-
     override fun onResume() {
-        val themePreference: SwitchPreferenceCompat? = context?.let { findPreference(it.getString(R.string.theme_key)) }
+        val themePreference: SwitchPreferenceCompat? =
+            context?.let { findPreference(it.getString(R.string.theme_key)) }
 
         themePreference?.let {
             it.setOnPreferenceChangeListener { _, newValue ->
@@ -68,25 +54,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-        val langPreference: ListPreference? = context?.let { findPreference(it.getString(R.string.lang_key)) }
+        val langPreference: ListPreference? =
+            context?.let { findPreference(it.getString(R.string.lang_key)) }
 
         langPreference?.let { lang ->
             lang.setOnPreferenceChangeListener { _, newValue ->
-//                activity?.let {
-//                    LocaleHelper.setLocale(it, newValue.toString())
-//                    activity?.finish()
-//                    startActivity(Intent(it, MainActivity::class.java))
-//                }
-                val configuration: Configuration? = TabataTimerApplication.applicationContext?.resources?.configuration
-                configuration?.setLocale(Locale(newValue as String))
-                resources.updateConfiguration(configuration, resources.displayMetrics)
-                activity?.recreate()
+                TabataTimerApplication.applicationContext?.let {
+                    val configuration: Configuration = it.resources.configuration
+                    configuration.setLocale(Locale(newValue as String))
+                    it.resources.updateConfiguration(configuration, resources.displayMetrics)
+                    activity?.recreate()
+                }
                 true
 
             }
         }
 
-        val fontSizePreference: ListPreference? = context?.let { findPreference(it.getString(R.string.font_key)) }
+        val fontSizePreference: ListPreference? =
+            context?.let { findPreference(it.getString(R.string.font_key)) }
 
         fontSizePreference?.let { font ->
             font.setOnPreferenceChangeListener { _, newValue ->
@@ -118,7 +103,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-        val resetPreference: Preference? = context?.let { findPreference(it.getString(R.string.delete_key)) }
+        val resetPreference: Preference? =
+            context?.let { findPreference(it.getString(R.string.delete_key)) }
 
         resetPreference?.setOnPreferenceClickListener {
             context?.let { context_dialog ->

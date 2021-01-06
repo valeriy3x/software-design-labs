@@ -2,6 +2,8 @@ package by.bsuir.tabatatimer.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import by.bsuir.tabatatimer.R
+import by.bsuir.tabatatimer.TabataTimerApplication
 import by.bsuir.tabatatimer.data.viewdata.Sequence
 import by.bsuir.tabatatimer.repositories.Repository
 import by.bsuir.tabatatimer.utilities.HomeNavigation
@@ -162,6 +164,6 @@ class EditWorkoutViewModel(private val repo: Repository) : ViewModel() {
     }
 
     companion object {
-        const val minValReachedMessage = "Minimal value has been reached!"
+        private val minValReachedMessage = TabataTimerApplication.applicationContext?.getString(R.string.min_val_error)
     }
 }

@@ -33,6 +33,12 @@
     <string name="size_key" translatable="false">sizeCoef</string>
     <string name="delete_warning">Are you sure you want to delete all stored data?</string>
     <string name="dialog_positive">Yes</string>
+    <string name="warning">Warning!</string>
+    <string name="warning_message">Do you really want to stop your workout?</string>
+    <string name="cancel">Cancel</string>
+    <string name="workout_error">Oops. An error occurred!</string>
+    <string name="success_delete">All your data have been successfully deleted</string>
+    <string name="min_val_error">Minimum value has been reached!</string>
     <string-array name="languages">
         <item>English</item>
         <item>German</item>

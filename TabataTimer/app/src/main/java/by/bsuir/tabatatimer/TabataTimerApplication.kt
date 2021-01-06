@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import androidx.room.Room
 import by.bsuir.tabatatimer.database.AppDatabase
-import by.bsuir.tabatatimer.utilities.LocaleHelper
 import java.util.*
 
 

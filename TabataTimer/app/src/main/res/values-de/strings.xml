@@ -33,4 +33,11 @@
     <string name="delete_title">Löschen Sie alle Daten</string>
     <string name="delete_warning">Möchten Sie wirklich alle gespeicherten Daten löschen?</string>
     <string name="dialog_positive">Ja</string>
+
+    <string name="warning">Warnung!</string>
+    <string name="warning_message">Möchten Sie Ihr Training wirklich beenden?</string>
+    <string name="cancel">Stornieren</string>
+    <string name="workout_error">Hoppla. Ein Fehler ist aufgetreten!</string>
+    <string name="success_delete">Alle Ihre Daten wurden erfolgreich gelöscht</string>
+    <string name="min_val_error">Mindestwert wurde erreicht!</string>
 </resources>

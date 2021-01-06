@@ -2,6 +2,8 @@ package by.bsuir.tabatatimer.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import by.bsuir.tabatatimer.R
+import by.bsuir.tabatatimer.TabataTimerApplication
 import by.bsuir.tabatatimer.repositories.Repository
 import by.bsuir.tabatatimer.data.viewdata.Sequence
 import by.bsuir.tabatatimer.data.viewdata.helpers.StepManager
@@ -70,16 +72,11 @@ class WorkoutViewModel(private val repo: Repository) : ViewModel() {
         stepManager.value = StepManager.NextStep
     }
 
-    fun prevStep() {
+    fun previousStep() {
         stepManager.value = StepManager.PreviousStep
     }
 
-    fun startWorkout() {
-        running.value = true
-        stepManager.value = StepManager.Start
-    }
-
-    fun pauseWorkout() {
+    fun startOrPauseWorkout() {
         if (running.value == true) {
             stepManager.value = StepManager.Pause
             running.value = false
@@ -115,7 +112,7 @@ class WorkoutViewModel(private val repo: Repository) : ViewModel() {
     }
 
     companion object {
-        const val globalErrorMessage = "Oops. An error occurred!"
+        private val globalErrorMessage = context.getString(R.string.workout_error)
     }
 }
 

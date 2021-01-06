@@ -1,8 +1,6 @@
 package by.bsuir.tabatatimer.viewmodels
 
-import android.graphics.Color
 import android.util.Log
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import by.bsuir.tabatatimer.data.viewdata.Sequence

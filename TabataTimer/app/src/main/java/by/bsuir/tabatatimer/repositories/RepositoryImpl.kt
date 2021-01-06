@@ -1,10 +1,8 @@
 package by.bsuir.tabatatimer.repositories
 
-import androidx.room.Room
 import by.bsuir.tabatatimer.TabataTimerApplication
 import by.bsuir.tabatatimer.data.dbo.SequenceDbo
 import by.bsuir.tabatatimer.data.viewdata.Sequence
-import by.bsuir.tabatatimer.database.AppDatabase
 import by.bsuir.tabatatimer.database.SequencesDao
 import io.reactivex.Flowable
 

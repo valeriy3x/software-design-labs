@@ -90,7 +90,6 @@ class WorkoutFragment : Fragment(R.layout.fragment_workout) {
         val intent = Intent(context, WorkoutService::class.java)
         intent.putExtra(WorkoutService.broadcastDurationsExtra, viewModel.durations as ArrayList<*>)
         intent.putExtra(WorkoutService.broadcastStepsExtra, viewModel.steps as ArrayList<*>)
-        intent.putExtra("sequence", args.sequence)
 
         val serviceConnection = object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -153,12 +152,12 @@ class WorkoutFragment : Fragment(R.layout.fragment_workout) {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             context?.let { context_dialog ->
                 AlertDialog.Builder(context_dialog)
-                    .setTitle("Warning!")
-                    .setMessage("Do you really want to stop your workout?")
+                    .setTitle(getString(R.string.warning))
+                    .setMessage(getString(R.string.warning_message))
                     .setPositiveButton(
                         getString(R.string.dialog_positive)
                     ) { _, _ -> viewModel.stopWorkout() }
-                    .setNegativeButton("Cancel") { _, _ ->
+                    .setNegativeButton(getString(R.string.cancel)) { _, _ ->
 
                     }
                     .show()
