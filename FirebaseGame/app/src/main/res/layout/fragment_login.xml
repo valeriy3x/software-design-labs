@@ -5,16 +5,17 @@
     tools:context=".views.LoginFragment">
 
     <data>
+
         <variable
             name="viewmodel"
             type="by.bsuir.firebasegame.viewmodels.AuthViewModel" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageView_logo_login"
@@ -35,6 +36,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            app:errorEnabled="true"
+            app:errorText="@{viewmodel.errorMessageEmail}"
             app:layout_constraintBottom_toTopOf="@id/textInput_layout_password_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,9 +47,9 @@
                 android:id="@+id/editText_email_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 android:background="@android:color/transparent"
-                android:hint="@string/email" />
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -54,9 +57,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            app:errorEnabled="true"
+            app:errorText="@{viewmodel.errorMessagePassword}"
             app:layout_constraintBottom_toTopOf="@id/button_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,9 +70,9 @@
                 android:id="@+id/editText_password_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
                 android:background="@android:color/transparent"
-                android:hint="@string/password" />
+                android:hint="@string/password"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:onClick="@{() -> viewmodel.login(editTextEmailLogin.getText().toString(), editTextPasswordLogin.getText().toString())}"
             android:text="@string/log_in"
             app:layout_constraintBottom_toTopOf="@id/textView_register_redirect"
             app:layout_constraintEnd_toEndOf="parent"
