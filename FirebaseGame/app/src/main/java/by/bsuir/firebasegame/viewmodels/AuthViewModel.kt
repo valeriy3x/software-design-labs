@@ -18,6 +18,12 @@ class AuthViewModel: ViewModel() {
     val errorMessageEmail: SingleLiveEvent<String?> = SingleLiveEvent()
     val errorMessagePassword: SingleLiveEvent<String?> = SingleLiveEvent()
     val errorMessage: SingleLiveEvent<String> = SingleLiveEvent()
+
+    init {
+        if (webservice.currentUser?.isAnonymous == false) {
+            navigation.value = AuthNavigation.LoginToAccount
+        }
+    }
     
     fun register(email: String, password: String) {
         if(email.isNotEmpty() && password.isNotEmpty()) {
@@ -54,7 +60,6 @@ class AuthViewModel: ViewModel() {
     private fun validateCredentials(email: String, password: String) {
         errorMessageEmail.value = if (email.isEmpty()) emptyLinesErrorMessage else null
         errorMessagePassword.value = if (password.isEmpty()) emptyLinesErrorMessage else null
-        // TODO:Fucking single live event doesn't work in this case, fix later
     }
 
     fun redirectLoginToRegister() {

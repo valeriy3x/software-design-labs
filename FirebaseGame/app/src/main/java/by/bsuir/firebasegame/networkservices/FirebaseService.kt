@@ -7,6 +7,8 @@ import com.google.firebase.storage.FirebaseStorage
 
 interface FirebaseService {
 
+    val profilesPath: String
+    val imagesPath: String
     val auth: FirebaseAuth
     val currentUser: FirebaseUser?
     val storage: FirebaseStorage

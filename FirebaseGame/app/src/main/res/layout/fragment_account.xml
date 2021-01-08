@@ -1,73 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.AccountFragment">
 
-    <androidx.cardview.widget.CardView
+    <data>
+        <variable
+            name="viewmodel"
+            type="by.bsuir.firebasegame.viewmodels.AccountViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:padding="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <View
+            android:id="@+id/background_dim"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:background="#42000000"
+            android:visibility="@{viewmodel.progress ? View.VISIBLE : View.GONE}"
+            android:elevation="10dp"/>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_margin="8dp"
-                android:id="@+id/circle_imageView_account"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="12dp"
+                    app:civ_border_width="1dp"
+                    android:id="@+id/circle_imageView_account" />
 
 
-            <TextView
-                android:id="@+id/textView_nickname_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="12dp"
-                android:text="Nickname"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/circle_imageView_account"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                <TextView
+                    android:id="@+id/textView_nickname_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="12dp"
+                    android:text="@{viewmodel.nickname}"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/circle_imageView_account"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
-            <TextView
-                android:id="@+id/textView_logout_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Log Out"
-                android:layout_margin="8dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/holo_red_light" />
+                <TextView
+                    android:id="@+id/textView_logout_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/log_out"
+                    android:onClick="@{() -> viewmodel.logout()}"
+                    android:layout_margin="16dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/holo_red_light" />
 
-            <ImageButton
-                android:id="@+id/imageButton_edit_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:layout_below="@id/textView_logout_account"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_baseline_edit_24" />
+                <ImageButton
+                    android:id="@+id/imageButton_edit_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{() -> viewmodel.editProfile()}"
+                    android:layout_below="@id/textView_logout_account"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_edit_24" />
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="12dp"
+            android:visibility="@{viewmodel.progress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -12,64 +12,86 @@ import by.bsuir.firebasegame.utilities.SingleLiveEvent
 import io.reactivex.Completable
 import java.util.*
 
-class EditViewModel: ViewModel() {
+class EditViewModel : ViewModel() {
     private val webservice: FirebaseService = FirebaseServiceImpl
     var nickname: MutableLiveData<String> = MutableLiveData()
     var avatar: MutableLiveData<Bitmap> = MutableLiveData()
     var avatarUrl: MutableLiveData<Uri> = MutableLiveData()
-
+    var avatarWeb: MutableLiveData<String> = MutableLiveData()
+    private var profile: Profile? = null
     var progressProfile = MutableLiveData(false)
     var progressAvatar = MutableLiveData(false)
     var navigation: SingleLiveEvent<GameNavigation> = SingleLiveEvent()
     var nicknameErrorMessage = SingleLiveEvent<String?>()
     var globalErrorMessage = SingleLiveEvent<String?>()
 
-    fun createOrEditProfile() {
+
+    fun fillFields(profile: Profile) {
+        nickname.value = profile.nickname
+        avatarWeb.value = profile.avatar
+
+        this.profile = profile
+    }
+
+
+    fun createOrEditProfile() { //TODO : Implement starting unknown avatar picture
         val nick = nickname.value ?: ""
 
         if (nick.isNotEmpty()) {
 
-            val userId = FirebaseServiceImpl.currentUser?.uid ?: ""
-            val avatarUrl = UUID.randomUUID().toString()
+            if (profile != null && avatarUrl.value == null) {
+                profile?.let {
+                    progressProfile.value = true
+                    uploadProfileData(it.id, it.avatar, nick)
+                }
 
-            val profile = Profile(userId, avatarUrl, nick)
+                return
+            }
+
+            val userId = FirebaseServiceImpl.currentUser?.uid ?: ""
+            val url = UUID.randomUUID().toString()
 
             progressProfile.value = true
             progressAvatar.value = true
-            val ref = webservice.database.getReference("users").child(userId)
+
+            val storageRef = webservice.storage.reference.child(webservice.imagesPath + url)
+            avatarUrl.value?.let {
+                storageRef.putFile(it)
+                    .addOnSuccessListener {
+                        progressAvatar.value = false
+                    }
+                    .continueWith {
+                        storageRef.downloadUrl.addOnSuccessListener { uri ->
+                            uploadProfileData(userId, uri.toString(), nick)
+                        }
+                    }
+                    .addOnFailureListener { ex ->
+                        progressAvatar.value = false
+                        globalErrorMessage.value = ex.message
+                    }
 
 
-            ref.setValue(profile)
-                .addOnSuccessListener {
-                    progressProfile.value = false
-                }
-                .addOnFailureListener {
-                    progressProfile.value = false
-                    globalErrorMessage.value = it.message
-                }
-                .continueWith {
-                    uploadAvatarToStorage(avatarUrl)
-                }
-        }
-        else {
+            }
+        } else {
             nicknameErrorMessage.value = nicknameBlankMessage
         }
     }
 
-    private fun uploadAvatarToStorage(url: String) {
-        val storageRef = webservice.storage.reference.child("images/" + url)
-        avatarUrl.value?.let {
-            storageRef.putFile(it)
-                .addOnSuccessListener {
-                    progressAvatar.value = false
-                    navigation.value = GameNavigation.EditToAccount
-                }
-                .addOnFailureListener { ex ->
-                    progressAvatar.value = false
-                    globalErrorMessage.value = ex.message
-                }
+    private fun uploadProfileData(id: String, avatar: String, nick: String) {
+        val ref = webservice.database.getReference(webservice.profilesPath).child(id)
 
-        }
+        val profile = Profile(id, avatar, nick)
+
+        ref.setValue(profile)
+            .addOnSuccessListener {
+                progressProfile.value = false
+
+                navigation.value = GameNavigation.EditToAccount
+            }
+            .addOnFailureListener {
+                progressProfile.value = false
+                globalErrorMessage.value = it.message
+            }
     }
 
     fun changeAvatar() {

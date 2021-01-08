@@ -6,6 +6,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
 object FirebaseServiceImpl: FirebaseService {
+    override val profilesPath: String
+        get() = "users"
+
+    override val imagesPath: String
+        get() = "images/"
+
     override val auth by lazy { FirebaseAuth.getInstance()}
 
     override val currentUser: FirebaseUser?
