@@ -1,5 +1,6 @@
 package by.bsuir.firebasegame.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +43,7 @@ class RegisterFragment: Fragment(R.layout.fragment_register) {
         viewModel.navigation.observe(viewLifecycleOwner) {
             when(it) {
                 AuthNavigation.RegisterToLogin -> { redirectToLogin() }
-                AuthNavigation.RegisterToAccount -> { redirectToAccount() }
+                AuthNavigation.RegisterToEdit -> { redirectToEdit() }
             }
         }
 
@@ -56,8 +57,9 @@ class RegisterFragment: Fragment(R.layout.fragment_register) {
         findNavController().navigate(action)
     }
 
-    private fun redirectToAccount() {
-        val action = RegisterFragmentDirections.actionRegisterFragmentToAccountFragment()
+    private fun redirectToEdit() {
+        val action = RegisterFragmentDirections.actionRegisterFragmentToEditFragment()
         findNavController().navigate(action)
     }
+    
 }

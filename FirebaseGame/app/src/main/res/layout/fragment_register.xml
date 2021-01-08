@@ -83,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/register"
+            android:enabled="@{!viewmodel.progress}"
             android:onClick="@{() -> viewmodel.register(editTextEmailRegister.getText().toString(), editTextPasswordRegister.getText().toString())}"
             app:layout_constraintBottom_toTopOf="@id/textView_login_redirect"
             app:layout_constraintEnd_toEndOf="parent"

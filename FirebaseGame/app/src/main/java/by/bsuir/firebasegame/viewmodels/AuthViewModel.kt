@@ -12,7 +12,7 @@ import com.google.android.play.core.tasks.Task
 import com.google.firebase.auth.AuthResult
 
 class AuthViewModel: ViewModel() {
-    val webservice: FirebaseService = FirebaseServiceImpl
+    private val webservice: FirebaseService = FirebaseServiceImpl
     var navigation = SingleLiveEvent<AuthNavigation>()
     var progress = MutableLiveData<Boolean>(false)
     val errorMessageEmail: SingleLiveEvent<String?> = SingleLiveEvent()
@@ -25,7 +25,7 @@ class AuthViewModel: ViewModel() {
             webservice.auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     progress.value = false
-                    navigation.value = AuthNavigation.RegisterToAccount
+                    navigation.value = AuthNavigation.RegisterToEdit
                 }
                 .addOnFailureListener {
                     progress.value = false

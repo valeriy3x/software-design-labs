@@ -83,6 +83,7 @@
             android:layout_marginTop="32dp"
             android:onClick="@{() -> viewmodel.login(editTextEmailLogin.getText().toString(), editTextPasswordLogin.getText().toString())}"
             android:text="@string/log_in"
+            android:enabled="@{!viewmodel.progress}"
             app:layout_constraintBottom_toTopOf="@id/textView_register_redirect"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -8,4 +8,7 @@
     <string name="title_register">Register in Draughts Online</string>
     <string name="login_redirect">Already have an account? Log In!</string>
     <string name="register">Register</string>
+    <string name="nickname">Nickname:</string>
+    <string name="submit">Submit</string>
+    <string name="choose_your_avatar">Choose Your Avatar</string>
 </resources>
