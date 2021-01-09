@@ -9,6 +9,7 @@ interface FirebaseService {
 
     val profilesPath: String
     val imagesPath: String
+    val roomsPath: String
     val auth: FirebaseAuth
     val currentUser: FirebaseUser?
     val storage: FirebaseStorage

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.CreateRoomFragment">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="by.bsuir.firebasegame.viewmodels.RoomViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3pt"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/bu1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40pt"
+                    android:layout_marginRight="3pt"
+                    android:background="@color/white" />
+
+                <Button
+
+                    android:id="@+id/bu2"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:layout_marginRight="3pt"
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu3"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:background="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3pt"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/bu4"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:layout_marginRight="3pt"
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu5"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:layout_marginRight="3pt"
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu6"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:background="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/bu7"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:layout_marginRight="3pt"
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu8"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:layout_marginRight="3pt"
+                    android:textSize="50sp"
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu9"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:background="@color/white"
+                    android:textSize="50sp"/>
+            </TableRow>
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

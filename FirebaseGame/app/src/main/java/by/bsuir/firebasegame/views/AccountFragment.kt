@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import by.bsuir.firebasegame.R
+import by.bsuir.firebasegame.data.viewdata.Role
 import by.bsuir.firebasegame.databinding.FragmentAccountBinding
 import by.bsuir.firebasegame.utilities.GameNavigation
 import by.bsuir.firebasegame.utilities.InjectorUtils
@@ -45,6 +46,8 @@ class AccountFragment: Fragment(R.layout.fragment_account) {
             when(it) {
                 GameNavigation.AccountToEdit -> navigateToEdit()
                 GameNavigation.AccountToLogin -> navigateToLogin()
+                GameNavigation.AccountToCreate -> navigationToCreate()
+                GameNavigation.AccountToJoin -> navigationToJoin()
             }
         }
     }
@@ -56,6 +59,16 @@ class AccountFragment: Fragment(R.layout.fragment_account) {
 
     private fun navigateToLogin() {
         val action = AccountFragmentDirections.actionAccountFragmentToLoginFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigationToCreate() {
+        val action = AccountFragmentDirections.actionAccountFragmentToCreateRoomFragment(Role.Host, viewModel.profile)
+        findNavController().navigate(action)
+    }
+
+    private fun navigationToJoin() {
+        val action = AccountFragmentDirections.actionAccountFragmentToJoinRoomFragment(viewModel.profile)
         findNavController().navigate(action)
     }
 }

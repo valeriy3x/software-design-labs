@@ -5,26 +5,28 @@
     tools:context=".views.AccountFragment">
 
     <data>
+
         <variable
             name="viewmodel"
             type="by.bsuir.firebasegame.viewmodels.AccountViewModel" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/background_dim"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:background="#42000000"
-            android:visibility="@{viewmodel.progress ? View.VISIBLE : View.GONE}"
-            android:elevation="10dp"/>
+                <View
+                    android:id="@+id/background_dim"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:background="#42000000"
+                    android:visibility="@{viewmodel.progress ? View.VISIBLE : View.GONE}"
+                    android:elevation="10dp"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -33,6 +35,7 @@
             android:padding="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="6dp"
+            app:layout_constraintBottom_toTopOf="@id/cardView_games"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -43,22 +46,22 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circle_imageView_account"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="12dp"
-                    app:civ_border_width="1dp"
-                    android:id="@+id/circle_imageView_account" />
+                    app:civ_border_width="1dp" />
 
 
                 <TextView
                     android:id="@+id/textView_nickname_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginStart="12dp"
-                    android:text="@{viewmodel.nickname}"
-                    android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/circle_imageView_account"
+                    android:text="@{viewmodel.nickname}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
@@ -66,11 +69,11 @@
                     android:id="@+id/textView_logout_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/log_out"
-                    android:onClick="@{() -> viewmodel.logout()}"
-                    android:layout_margin="16dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_margin="16dp"
+                    android:onClick="@{() -> viewmodel.logout()}"
+                    android:text="@string/log_out"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/holo_red_light" />
 
@@ -78,15 +81,76 @@
                     android:id="@+id/imageButton_edit_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/textView_logout_account"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
-                    android:onClick="@{() -> viewmodel.editProfile()}"
-                    android:layout_below="@id/textView_logout_account"
                     android:background="@android:color/transparent"
+                    android:onClick="@{() -> viewmodel.editProfile()}"
                     android:src="@drawable/ic_baseline_edit_24" />
 
             </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView_account">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/games"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button_create_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.createGameRoom()}"
+                        android:gravity="center"
+                        android:text="@string/create_room" />
+
+                    <Button
+                        android:id="@+id/button_join_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:onClick="@{() -> viewmodel.joinGameRoom()}"
+                        android:text="@string/join_room" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
 

@@ -53,6 +53,12 @@
             android:id="@+id/action_accountFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/nav_graph" />
+        <action
+            android:id="@+id/action_accountFragment_to_joinRoomFragment"
+            app:destination="@id/joinRoomFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_createRoomFragment"
+            app:destination="@id/createRoomFragment" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
@@ -63,6 +69,39 @@
             android:id="@+id/action_editFragment_to_accountFragment"
             app:destination="@id/accountFragment"
             app:popUpTo="@id/nav_graph" />
+        <argument
+            android:name="profile"
+            app:argType="by.bsuir.firebasegame.data.viewdata.Profile"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/createRoomFragment"
+        android:name="by.bsuir.firebasegame.views.CreateRoomFragment"
+        android:label="fragment_create_room"
+        tools:layout="@layout/fragment_create_room" >
+        <argument
+            android:name="role"
+            app:argType="by.bsuir.firebasegame.data.viewdata.Role" />
+        <argument
+            android:name="profile"
+            app:argType="by.bsuir.firebasegame.data.viewdata.Profile"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="roomId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinRoomFragment"
+        android:name="by.bsuir.firebasegame.views.JoinRoomFragment"
+        android:label="fragment_join_room"
+        tools:layout="@layout/fragment_join_room" >
+        <action
+            android:id="@+id/action_joinRoomFragment_to_createRoomFragment"
+            app:destination="@id/createRoomFragment" />
         <argument
             android:name="profile"
             app:argType="by.bsuir.firebasegame.data.viewdata.Profile"

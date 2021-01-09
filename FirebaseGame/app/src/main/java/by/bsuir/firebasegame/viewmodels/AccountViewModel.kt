@@ -6,6 +6,7 @@ import by.bsuir.firebasegame.data.viewdata.Profile
 import by.bsuir.firebasegame.networkservices.FirebaseService
 import by.bsuir.firebasegame.networkservices.FirebaseServiceImpl
 import by.bsuir.firebasegame.utilities.GameNavigation
+import by.bsuir.firebasegame.utilities.SingleLiveEvent
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -16,7 +17,7 @@ class AccountViewModel: ViewModel() {
     var profile: Profile? = null
     val nickname: MutableLiveData<String> = MutableLiveData()
     val avatarUrl: MutableLiveData<String> = MutableLiveData()
-    val navigation: MutableLiveData<GameNavigation> = MutableLiveData()
+    val navigation: SingleLiveEvent<GameNavigation> = SingleLiveEvent()
     val progress: MutableLiveData<Boolean> = MutableLiveData(false)
 
 
@@ -31,13 +32,21 @@ class AccountViewModel: ViewModel() {
                 profile = snapshot.getValue<Profile>()
                 nickname.value = profile?.nickname
                 avatarUrl.value = profile?.avatar
-                progress.value = false // TODO : Avatar downloads too slow
+                progress.value = false //
             }
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    fun createGameRoom() {
+        navigation.value = GameNavigation.AccountToCreate
+    }
+
+    fun joinGameRoom() {
+        navigation.value = GameNavigation.AccountToJoin
     }
 
     fun logout() {

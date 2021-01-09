@@ -12,6 +12,9 @@ object FirebaseServiceImpl: FirebaseService {
     override val imagesPath: String
         get() = "images/"
 
+    override val roomsPath: String
+        get() = "rooms"
+
     override val auth by lazy { FirebaseAuth.getInstance()}
 
     override val currentUser: FirebaseUser?
