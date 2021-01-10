@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Firebase Game</string>
+    <string name="draughts_game">Tic Tac Toe Online</string>
+    <string name="log_in">Log In</string>
+    <string name="register_redirect">Doesn\'t have an account? Register!</string>
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="title_register">Register in Draughts Online</string>
+    <string name="login_redirect">Already have an account? Log In!</string>
+    <string name="register">Register</string>
+    <string name="nickname">Nickname:</string>
+    <string name="submit">Submit</string>
+    <string name="choose_your_avatar">Choose Your Avatar</string>
+    <string name="log_out">Log Out</string>
+    <string name="create_room">Create Room</string>
+    <string name="join_room">Join Room</string>
+    <string name="games">Games</string>
+    <string name="join">Join</string>
+    <string name="room_id">Room ID</string>
+    <string name="join_existing_game_room">Join Existing Game Room</string>
+    <string name="waiting_for_the_opponent_to_join_the_room">Waiting for the opponent to join the room</string>
+    <string name="start_the_game">Start The Game</string>
+    <string name="vs">VS</string>
+    <string name="room_number">Room number:</string>
+    <string name="turn">Turn:</string>
+    <string name="your_turn">Your turn</string>
+    <string name="statistics">Statistics</string>
+    <string name="use_gravatar">Use Gravatar</string>
+    <string name="congrats">Congratulations!</string>
+    <string name="congrats_text">You won the game!</string>
+    <string name="okay">Okay</string>
+    <string name="sorru">Sorry!</string>
+    <string name="could_you_please_accept_this_lab_i_promise_i_will_pass_all_front_end_labs_asap">You lost the game!</string>
+</resources>

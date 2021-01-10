@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.PlaygroundFragment">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="by.bsuir.firebasegame.viewmodels.PlaygroundViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:id="@+id/game_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:background="@color/white"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_turn">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3pt"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/bu1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40pt"
+                    android:text="@{viewmodel.gameArea[0][0]}"
+                    android:textSize="50sp"
+                    android:layout_marginRight="3pt"
+                    android:onClick='@{() -> viewmodel.markCell(0, 0)}'
+                    android:background="@color/white" />
+
+                <Button
+
+                    android:id="@+id/bu2"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:textSize="50sp"
+                    android:text="@{viewmodel.gameArea[0][1]}"
+                    android:layout_marginRight="3pt"
+                    android:onClick='@{() -> viewmodel.markCell(0, 1)}'
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu3"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:textSize="50sp"
+                    android:text="@{viewmodel.gameArea[0][2]}"
+                    android:onClick='@{() -> viewmodel.markCell(0, 2)}'
+                    android:background="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3pt"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/bu4"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:textSize="50sp"
+                    android:layout_marginRight="3pt"
+                    android:text="@{viewmodel.gameArea[1][0]}"
+                    android:onClick='@{() -> viewmodel.markCell(1, 0)}'
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu5"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:textSize="50sp"
+                    android:text="@{viewmodel.gameArea[1][1]}"
+                    android:layout_marginRight="3pt"
+                    android:onClick='@{() -> viewmodel.markCell(1, 1)}'
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu6"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:textSize="50sp"
+                    android:text="@{viewmodel.gameArea[1][2]}"
+                    android:onClick='@{() -> viewmodel.markCell(1, 2)}'
+                    android:background="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/bu7"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:textSize="50sp"
+                    android:layout_marginRight="3pt"
+                    android:text="@{viewmodel.gameArea[2][0]}"
+                    android:onClick='@{() -> viewmodel.markCell(2, 0)}'
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu8"
+                    android:layout_width="40pt"
+                    android:layout_height="40pt"
+                    android:textSize="50sp"
+                    android:layout_marginRight="3pt"
+                    android:text="@{viewmodel.gameArea[2][1]}"
+                    android:onClick='@{() -> viewmodel.markCell(2, 1)}'
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/bu9"
+                    android:layout_width="40pt"
+                    android:text="@{viewmodel.gameArea[2][2]}"
+                    android:onClick='@{() -> viewmodel.markCell(2, 2)}'
+                    android:layout_height="40pt"
+                    android:background="@color/white"
+                    android:textSize="50sp" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/textView_turn_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/turn"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toTopOf="@+id/textView_turn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.41000003"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView_turn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text='@{viewmodel.turn ? "Your turn" : "Enemy turn"}'
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@id/game_area"
+            app:layout_constraintEnd_toEndOf="@+id/textView_turn_title"
+            app:layout_constraintHorizontal_bias="0.535"
+            app:layout_constraintStart_toStartOf="@+id/textView_turn_title"
+            app:layout_constraintTop_toBottomOf="@+id/textView_turn_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

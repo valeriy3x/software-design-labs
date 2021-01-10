@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.CreateRoomFragment">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="by.bsuir.firebasegame.viewmodels.RoomViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:id="@+id/button_start_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:enabled="@{viewmodel.startGameEnabled}"
+            android:text="@string/start_the_game"
+            android:onClick="@{() -> viewmodel.startGame()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_room_id" />
+
+        <TextView
+            android:id="@+id/textView_waiting_room_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/waiting_for_the_opponent_to_join_the_room"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toTopOf="@id/circleImageView_host_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.32999998"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView_room_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="@{@string/room_number + ' ' + viewmodel.roomId}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/button_start_game"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_host_nick" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageView_guest_avatar"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:civ_border_width="1dp"
+            android:src="@drawable/unknown"
+            app:layout_constraintBottom_toTopOf="@id/textView_guest_nick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView_vs"
+            app:layout_constraintTop_toTopOf="@+id/circleImageView_host_avatar" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageView_host_avatar"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:civ_border_width="1dp"
+            android:src="@drawable/unknown"
+            android:layout_marginTop="64dp"
+            app:layout_constraintBottom_toTopOf="@id/textView_host_nick"
+            app:layout_constraintEnd_toStartOf="@id/textView_vs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_waiting_room_title" />
+
+        <TextView
+            android:id="@+id/textView_host_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@{viewmodel.host.nickname}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/textView_room_id"
+            app:layout_constraintEnd_toEndOf="@+id/circleImageView_host_avatar"
+            app:layout_constraintStart_toStartOf="@+id/circleImageView_host_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView_host_avatar" />
+
+        <TextView
+            android:id="@+id/textView_guest_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@{viewmodel.guest.nickname}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_host_nick"
+            app:layout_constraintEnd_toEndOf="@+id/circleImageView_guest_avatar"
+            app:layout_constraintStart_toStartOf="@+id/circleImageView_guest_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView_guest_avatar" />
+
+        <TextView
+            android:id="@+id/textView_vs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vs"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="@+id/circleImageView_host_avatar"
+            app:layout_constraintEnd_toStartOf="@+id/circleImageView_guest_avatar"
+            app:layout_constraintStart_toEndOf="@+id/circleImageView_host_avatar"
+            app:layout_constraintTop_toTopOf="@+id/circleImageView_host_avatar" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_room"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewmodel.progress? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_start_game" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
