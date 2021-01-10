@@ -9,8 +9,12 @@ import by.bsuir.firebasegame.networkservices.FirebaseService
 import by.bsuir.firebasegame.networkservices.FirebaseServiceImpl
 import by.bsuir.firebasegame.utilities.GameNavigation
 import by.bsuir.firebasegame.utilities.SingleLiveEvent
-import io.reactivex.Completable
+import java.math.BigInteger
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.util.*
+import kotlin.experimental.and
+import kotlin.experimental.or
 
 class EditViewModel : ViewModel() {
     private val webservice: FirebaseService = FirebaseServiceImpl
@@ -24,6 +28,7 @@ class EditViewModel : ViewModel() {
     var navigation: SingleLiveEvent<GameNavigation> = SingleLiveEvent()
     var nicknameErrorMessage = SingleLiveEvent<String?>()
     var globalErrorMessage = SingleLiveEvent<String?>()
+    var usingGravatar = false
 
 
     fun fillFields(profile: Profile) {
@@ -54,23 +59,30 @@ class EditViewModel : ViewModel() {
             progressProfile.value = true
             progressAvatar.value = true
 
-            val storageRef = webservice.storage.reference.child(webservice.imagesPath + url)
-            avatarUrl.value?.let {
-                storageRef.putFile(it)
-                    .addOnSuccessListener {
-                        progressAvatar.value = false
-                    }
-                    .continueWith {
-                        storageRef.downloadUrl.addOnSuccessListener { uri ->
-                            uploadProfileData(userId, uri.toString(), nick)
+            if (usingGravatar) {
+                uploadProfileData(userId, avatarWeb.value!!, nick)
+            }
+
+            else {
+
+                val storageRef = webservice.storage.reference.child(webservice.imagesPath + url)
+                avatarUrl.value?.let {
+                    storageRef.putFile(it)
+                        .addOnSuccessListener {
+                            progressAvatar.value = false
                         }
-                    }
-                    .addOnFailureListener { ex ->
-                        progressAvatar.value = false
-                        globalErrorMessage.value = ex.message
-                    }
+                        .continueWith {
+                            storageRef.downloadUrl.addOnSuccessListener { uri ->
+                                uploadProfileData(userId, uri.toString(), nick)
+                            }
+                        }
+                        .addOnFailureListener { ex ->
+                            progressAvatar.value = false
+                            globalErrorMessage.value = ex.message
+                        }
 
 
+                }
             }
         } else {
             nicknameErrorMessage.value = nicknameBlankMessage
@@ -98,7 +110,31 @@ class EditViewModel : ViewModel() {
         navigation.value = GameNavigation.EditToPhotoSelector
     }
 
+    fun useGravatar() {
+        val email = webservice.currentUser?.email!!
+        val hash = hex(email)
+        avatarWeb.value = "$gravatarUrl$hash?s=80"
+        usingGravatar = true
+    }
+
+    private fun hex(mail: String): String? {
+        var result: String? = null
+
+        try {
+            val digest =
+                MessageDigest.getInstance("MD5")
+            digest.reset()
+            digest.update(mail.toByteArray())
+            val bigInt = BigInteger(1, digest.digest())
+            result = bigInt.toString(16)
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        }
+        return result
+    }
+
     companion object {
         private const val nicknameBlankMessage = "Nickname field couldn't be empty"
+        private const val gravatarUrl = "https://s.gravatar.com/avatar/"
     }
 }

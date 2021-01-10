@@ -101,6 +101,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                     )
                     viewModel.avatarUrl.value = filepath
                     viewModel.avatar.value = bitmap
+                    viewModel.usingGravatar = false
                 }
 
 
