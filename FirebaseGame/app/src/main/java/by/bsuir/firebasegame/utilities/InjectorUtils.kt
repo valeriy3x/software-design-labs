@@ -1,9 +1,7 @@
 package by.bsuir.firebasegame.utilities
 
-import by.bsuir.firebasegame.viewmodels.factories.AccountViewModelFactory
-import by.bsuir.firebasegame.viewmodels.factories.AuthViewModelFactory
-import by.bsuir.firebasegame.viewmodels.factories.EditViewModelFactory
-import by.bsuir.firebasegame.viewmodels.factories.RoomViewModelFactory
+import by.bsuir.firebasegame.viewmodels.PlaygroundViewModel
+import by.bsuir.firebasegame.viewmodels.factories.*
 
 object InjectorUtils {
     fun provideAuthViewModelFactory(): AuthViewModelFactory {
@@ -20,5 +18,9 @@ object InjectorUtils {
 
     fun provideRoomViewModelFactory(): RoomViewModelFactory {
         return RoomViewModelFactory()
+    }
+
+    fun providePlaygroundViewModelFactory(): PlaygroundViewModelFactory {
+        return PlaygroundViewModelFactory()
     }
 }

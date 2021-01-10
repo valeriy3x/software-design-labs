@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.bsuir.firebasegame.R
 import by.bsuir.firebasegame.data.viewdata.Role
 import by.bsuir.firebasegame.databinding.FragmentCreateRoomBinding
+import by.bsuir.firebasegame.utilities.GameNavigation
 import by.bsuir.firebasegame.utilities.InjectorUtils
 import by.bsuir.firebasegame.viewmodels.RoomViewModel
 import com.squareup.picasso.Picasso
@@ -64,6 +66,19 @@ class CreateRoomFragment: Fragment(R.layout.fragment_create_room) {
                     .load(it.avatar)
                     .into(binding.circleImageViewGuestAvatar)
             }
+        }
+
+        viewModel.navigation.observe(viewLifecycleOwner) {
+            when(it) {
+                GameNavigation.RoomToGame -> navigateToGame()
+            }
+        }
+    }
+
+    private fun navigateToGame() {
+        viewModel.relevantGameId?.let {
+            val action = CreateRoomFragmentDirections.actionCreateRoomFragmentToPlaygroundFragment(it, args.role)
+            findNavController().navigate(action)
         }
     }
 }

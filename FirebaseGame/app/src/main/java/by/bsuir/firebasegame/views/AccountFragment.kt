@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import by.bsuir.firebasegame.databinding.FragmentAccountBinding
 import by.bsuir.firebasegame.utilities.GameNavigation
 import by.bsuir.firebasegame.utilities.InjectorUtils
 import by.bsuir.firebasegame.viewmodels.AccountViewModel
+import by.bsuir.firebasegame.views.adapters.StatsAdapter
 import com.squareup.picasso.Picasso
 
 class AccountFragment: Fragment(R.layout.fragment_account) {
@@ -38,6 +40,16 @@ class AccountFragment: Fragment(R.layout.fragment_account) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fillData()
+
+        val recyclerView = binding.recyclerViewStats
+        val adapter = StatsAdapter()
+
+        viewModel.stats.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
+        recyclerView.adapter = adapter
+
         viewModel.avatarUrl.observe(viewLifecycleOwner) {
             Picasso.get().load(it).placeholder(R.drawable.unknown).into(binding.circleImageViewAccount)
         }

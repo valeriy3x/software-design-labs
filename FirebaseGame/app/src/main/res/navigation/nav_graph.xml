@@ -93,6 +93,9 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_createRoomFragment_to_playgroundFragment"
+            app:destination="@id/playgroundFragment" />
     </fragment>
     <fragment
         android:id="@+id/joinRoomFragment"
@@ -107,5 +110,20 @@
             app:argType="by.bsuir.firebasegame.data.viewdata.Profile"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/playgroundFragment"
+        android:name="by.bsuir.firebasegame.views.PlaygroundFragment"
+        android:label="fragment_playground"
+        tools:layout="@layout/fragment_playground" >
+        <action
+            android:id="@+id/action_playgroundFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <argument
+            android:name="gameid"
+            app:argType="string" />
+        <argument
+            android:name="role"
+            app:argType="by.bsuir.firebasegame.data.viewdata.Role" />
     </fragment>
 </navigation>

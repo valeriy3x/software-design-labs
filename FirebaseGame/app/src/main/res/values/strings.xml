@@ -22,4 +22,7 @@
     <string name="start_the_game">Start The Game</string>
     <string name="vs">VS</string>
     <string name="room_number">Room number:</string>
+    <string name="turn">Turn:</string>
+    <string name="your_turn">Your turn</string>
+    <string name="statistics">Statistics</string>
 </resources>

@@ -80,7 +80,7 @@ class EditViewModel : ViewModel() {
     private fun uploadProfileData(id: String, avatar: String, nick: String) {
         val ref = webservice.database.getReference(webservice.profilesPath).child(id)
 
-        val profile = Profile(id, avatar, nick)
+        val profile = Profile(id, avatar, nick, mutableListOf())
 
         ref.setValue(profile)
             .addOnSuccessListener {

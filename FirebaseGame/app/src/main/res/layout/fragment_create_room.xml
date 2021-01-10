@@ -23,6 +23,7 @@
             android:layout_marginTop="32dp"
             android:enabled="@{viewmodel.startGameEnabled}"
             android:text="@string/start_the_game"
+            android:onClick="@{() -> viewmodel.startGame()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

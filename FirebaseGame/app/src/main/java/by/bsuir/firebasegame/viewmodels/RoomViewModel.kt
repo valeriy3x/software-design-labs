@@ -2,6 +2,7 @@ package by.bsuir.firebasegame.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import by.bsuir.firebasegame.data.viewdata.Playground
 import by.bsuir.firebasegame.data.viewdata.Profile
 import by.bsuir.firebasegame.data.viewdata.Role
 import by.bsuir.firebasegame.data.viewdata.Room
@@ -28,14 +29,15 @@ class RoomViewModel : ViewModel() {
     var errorJoinRoom: SingleLiveEvent<String?> = SingleLiveEvent()
     val navigation: SingleLiveEvent<GameNavigation> = SingleLiveEvent()
     val startGameEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
+    var relevantGameId: String? = null
 
 
     fun createGameRoom() {
         progress.value = true
-        val rId = Random(System.nanoTime()).nextInt(from = 1, until = 1000).toString()
+        val rId = Random(System.nanoTime()).nextInt(from = 1, until = 100000).toString()
         roomId.value = rId
 
-        val room = Room(rId, profile, Profile())
+        val room = Room(rId, profile, Profile(), "")
         val roomRef = webservice.database.getReference(webservice.roomsPath).child(room.roomId)
         roomRef.setValue(room)
             .addOnSuccessListener {
@@ -50,6 +52,7 @@ class RoomViewModel : ViewModel() {
 
                         startGameEnabled.value = changedRoom?.host?.id?.isNotEmpty() == true
                                 && changedRoom.guest.id.isNotEmpty()
+
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -72,6 +75,13 @@ class RoomViewModel : ViewModel() {
                 roomReference.child(id).addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val changedRoom = snapshot.getValue<Room>()
+
+                        if (changedRoom?.relevantGame?.isNotEmpty() == true){
+                            relevantGameId = changedRoom.relevantGame
+                            navigation.value = GameNavigation.RoomToGame
+                        }
+
+
                         host.value = changedRoom?.host
                         guest.value = changedRoom?.guest
                     }
@@ -102,6 +112,41 @@ class RoomViewModel : ViewModel() {
             }
         })
 
+    }
+
+    fun startGame() {
+        val randomId = Random(System.nanoTime()).nextInt(from = 1, until = 100000).toString()
+        relevantGameId = randomId
+        val playground = Playground(randomId, host.value!!.id, guest.value!!.id, host.value!!.id,
+            "", MutableList(3) { MutableList(3) {""} } )
+
+
+        val gameRef = webservice.database.getReference(webservice.playgroundsPath).child(randomId)
+            .child("game")
+        progress.value = true
+        gameRef.setValue(playground)
+            .addOnSuccessListener {
+                progress.value = false
+                writeGameId(randomId)
+            }
+            .addOnFailureListener {
+                progress.value = false
+            }
+    }
+
+    private fun writeGameId(id: String) {
+        val roomRef = webservice.database.getReference(webservice.roomsPath).child(roomId.value!!)
+            .child(webservice.relevantGamePath)
+
+        progress.value = true
+        roomRef.setValue(id)
+            .addOnSuccessListener {
+                progress.value = false
+                navigation.value = GameNavigation.RoomToGame
+            }
+            .addOnFailureListener {
+                progress.value = false
+            }
     }
 
     companion object {

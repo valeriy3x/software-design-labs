@@ -3,6 +3,7 @@ package by.bsuir.firebasegame.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import by.bsuir.firebasegame.data.viewdata.Profile
+import by.bsuir.firebasegame.data.viewdata.Stat
 import by.bsuir.firebasegame.networkservices.FirebaseService
 import by.bsuir.firebasegame.networkservices.FirebaseServiceImpl
 import by.bsuir.firebasegame.utilities.GameNavigation
@@ -19,6 +20,7 @@ class AccountViewModel: ViewModel() {
     val avatarUrl: MutableLiveData<String> = MutableLiveData()
     val navigation: SingleLiveEvent<GameNavigation> = SingleLiveEvent()
     val progress: MutableLiveData<Boolean> = MutableLiveData(false)
+    val stats: MutableLiveData<MutableList<Stat>> = MutableLiveData()
 
 
     fun fillData() {
@@ -33,6 +35,7 @@ class AccountViewModel: ViewModel() {
                 nickname.value = profile?.nickname
                 avatarUrl.value = profile?.avatar
                 progress.value = false //
+                stats.value = profile?.stats
             }
 
             override fun onCancelled(error: DatabaseError) {

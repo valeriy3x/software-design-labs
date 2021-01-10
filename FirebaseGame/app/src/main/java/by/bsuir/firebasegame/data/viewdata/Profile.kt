@@ -7,8 +7,9 @@ import kotlinx.android.parcel.Parcelize
 data class Profile(
     val id: String,
     val avatar: String,
-    val nickname: String
+    val nickname: String,
+    val stats: MutableList<Stat>
     ) : Parcelable
 {
-    constructor() : this("", "", "")
+    constructor() : this("", "", "", mutableListOf())
 }

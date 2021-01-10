@@ -2,10 +2,11 @@ package by.bsuir.firebasegame.data.viewdata
 
 data class Playground(
     val id: String,
-    val hostId: String,
-    val guestId: String,
+    var hostId: String,
+    var guestId: String,
     var turnId: String,
-    val gameArea: MutableList<MutableList<Char>>
+    var winnerId: String,
+    var gameArea: MutableList<MutableList<String>>
 ) {
-    constructor(): this("", "", "", "", mutableListOf())
+    constructor(): this("", "", "", "","", mutableListOf())
 }
