@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.AddWorkoutFragment">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="by.bsuir.tabatatimer.viewmodels.EditWorkoutViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_title_create"
+                style="@style/TextViewMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                app:layout_constraintBottom_toTopOf="@+id/editText_title_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <EditText
+                android:id="@+id/editText_title_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:gravity="center"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:text="@={viewmodel.title}"
+                app:layout_constraintBottom_toTopOf="@id/textView_prepare_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_title_create" />
+
+            <TextView
+                android:id="@+id/textView_prepare_create"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/prepare"
+                app:layout_constraintBottom_toTopOf="@id/editText_prepare_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_title_create" />
+
+
+            <ImageButton
+                android:id="@+id/imageButton_minus_prepare_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.decreasePrepareTime()}"
+                app:layout_constraintEnd_toStartOf="@id/editText_prepare_create"
+                app:layout_constraintStart_toEndOf="@id/editText_prepare_create"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editText_prepare_create"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <EditText
+                android:id="@+id/editText_prepare_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="@={`` + viewmodel.prepareTime}"
+                app:layout_constraintBottom_toTopOf="@id/textView_work_create"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton_plus_prepare_create"
+                app:layout_constraintHorizontal_bias="0.513"
+                app:layout_constraintStart_toEndOf="@+id/imageButton_minus_prepare_create"
+                app:layout_constraintTop_toBottomOf="@+id/textView_prepare_create" />
+
+            <ImageButton
+                android:id="@+id/imageButton_plus_prepare_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.increasePrepareTime()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editText_prepare_create"
+                app:layout_constraintTop_toTopOf="@+id/editText_prepare_create"
+                app:srcCompat="@drawable/ic_add" />
+
+            <TextView
+                android:id="@+id/textView_work_create"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/work"
+                app:layout_constraintBottom_toTopOf="@id/editText_work_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_prepare_create" />
+
+            <EditText
+                android:id="@+id/editText_work_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="@={`` + viewmodel.workTime}"
+                app:layout_constraintBottom_toTopOf="@id/textView_rest_create"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton_plus_work_create"
+                app:layout_constraintStart_toEndOf="@+id/imageButton_minus_work_create"
+                app:layout_constraintTop_toBottomOf="@+id/textView_work_create" />
+
+            <TextView
+                android:id="@+id/textView_rest_create"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rest"
+                app:layout_constraintBottom_toTopOf="@id/editText_rest_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_work_create" />
+
+            <EditText
+                android:id="@+id/editText_rest_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="@={`` + viewmodel.restTime}"
+                app:layout_constraintBottom_toTopOf="@id/textView_cycles_create"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton_plus_rest_create"
+                app:layout_constraintStart_toEndOf="@+id/imageButton_minus_rest_create"
+                app:layout_constraintTop_toBottomOf="@+id/textView_rest_create" />
+
+            <TextView
+                android:id="@+id/textView_cycles_create"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles"
+                app:layout_constraintBottom_toTopOf="@id/editText_cycles_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_rest_create" />
+
+            <EditText
+                android:id="@+id/editText_cycles_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="@={`` + viewmodel.cycles}"
+                app:layout_constraintBottom_toTopOf="@id/textView_sets_create"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton_plus_cycles_create"
+                app:layout_constraintStart_toEndOf="@+id/imageButton_minus_cycles_create"
+                app:layout_constraintTop_toBottomOf="@+id/textView_cycles_create" />
+
+            <TextView
+                android:id="@+id/textView_sets_create"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sets"
+                app:layout_constraintBottom_toTopOf="@id/editText_sets_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_cycles_create" />
+
+            <EditText
+                android:id="@+id/editText_sets_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="@={`` + viewmodel.setsCount}"
+                app:layout_constraintBottom_toTopOf="@id/textView_rest_between_sets_create"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton_plus_sets_create"
+                app:layout_constraintStart_toEndOf="@+id/imageButton_minus_sets_create"
+                app:layout_constraintTop_toBottomOf="@id/textView_sets_create" />
+
+            <TextView
+                android:id="@+id/textView_rest_between_sets_create"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rest_between_sets"
+                app:layout_constraintBottom_toTopOf="@id/editText_rest_between_sets_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_sets_create" />
+
+            <EditText
+                android:id="@+id/editText_rest_between_sets_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="@={`` + viewmodel.restBetweenSets}"
+                app:layout_constraintBottom_toTopOf="@id/textView_cool_down_create"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton_plus_rest_between_create"
+                app:layout_constraintStart_toEndOf="@+id/imageButton_minus_rest_between_create"
+                app:layout_constraintTop_toBottomOf="@+id/textView_rest_between_sets_create" />
+
+            <TextView
+                android:id="@+id/textView_cool_down_create"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cool_down"
+                app:layout_constraintBottom_toTopOf="@id/editText_cool_down_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_rest_between_sets_create" />
+
+            <EditText
+                android:id="@+id/editText_cool_down_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="@={`` + viewmodel.coolDown}"
+                app:layout_constraintBottom_toTopOf="@id/textView_current_color_create"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton_plus_cooldown_create"
+                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintStart_toEndOf="@+id/imageButton_minus_cooldown_create"
+                app:layout_constraintTop_toBottomOf="@+id/textView_cool_down_create" />
+
+            <ImageButton
+                android:id="@+id/imageButton_minus_work_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.decreaseWorkTime()}"
+                app:layout_constraintEnd_toStartOf="@id/editText_work_create"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editText_work_create"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <ImageButton
+                android:id="@+id/imageButton_minus_rest_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.decreaseRestTime()}"
+                app:layout_constraintEnd_toStartOf="@id/editText_rest_create"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editText_rest_create"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <ImageButton
+                android:id="@+id/imageButton_minus_cycles_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.decreaseCycles()}"
+                app:layout_constraintEnd_toStartOf="@id/editText_cycles_create"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editText_cycles_create"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <ImageButton
+                android:id="@+id/imageButton_minus_sets_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.decreaseSetsCount()}"
+                app:layout_constraintEnd_toStartOf="@id/editText_sets_create"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editText_sets_create"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <ImageButton
+                android:id="@+id/imageButton_minus_rest_between_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->viewmodel.decreaseRestBetweenSets()}"
+                app:layout_constraintEnd_toStartOf="@id/editText_rest_between_sets_create"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editText_rest_between_sets_create"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <ImageButton
+                android:id="@+id/imageButton_minus_cooldown_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.decreaseCoolDown()}"
+                app:layout_constraintEnd_toStartOf="@id/editText_cool_down_create"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editText_cool_down_create"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <ImageButton
+                android:id="@+id/imageButton_plus_work_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.increaseWorkTime()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editText_work_create"
+                app:layout_constraintTop_toTopOf="@id/editText_work_create"
+                app:srcCompat="@drawable/ic_add" />
+
+            <ImageButton
+                android:id="@+id/imageButton_plus_rest_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.increaseRestTime()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editText_rest_create"
+                app:layout_constraintTop_toTopOf="@+id/editText_rest_create"
+                app:srcCompat="@drawable/ic_add" />
+
+            <ImageButton
+                android:id="@+id/imageButton_plus_cycles_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.increaseCycles()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editText_cycles_create"
+                app:layout_constraintTop_toTopOf="@+id/editText_cycles_create"
+                app:srcCompat="@drawable/ic_add" />
+
+            <ImageButton
+                android:id="@+id/imageButton_plus_sets_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.increaseSetsCount()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editText_sets_create"
+                app:layout_constraintTop_toTopOf="@+id/editText_sets_create"
+                app:srcCompat="@drawable/ic_add" />
+
+            <ImageButton
+                android:id="@+id/imageButton_plus_rest_between_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.increaseRestBetweenSets()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editText_rest_between_sets_create"
+                app:layout_constraintTop_toTopOf="@+id/editText_rest_between_sets_create"
+                app:srcCompat="@drawable/ic_add" />
+
+            <ImageButton
+                android:id="@+id/imageButton_plus_cooldown_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.increaseCoolDown()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editText_cool_down_create"
+                app:layout_constraintTop_toTopOf="@+id/editText_cool_down_create"
+                app:srcCompat="@drawable/ic_add" />
+
+            <TextView
+                android:id="@+id/textView_current_color_create"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/current_color"
+                app:layout_constraintBottom_toTopOf="@id/button_submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_cool_down_create" />
+
+            <Button
+                android:id="@+id/button_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:onClick="@{() -> viewmodel.createOrUpdateWorkout()}"
+                android:text="@string/submit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_current_color_create" />
+
+            <Button
+                android:id="@+id/button_current_color"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="24dp"
+
+                app:layout_constraintBottom_toBottomOf="@+id/textView_current_color_create"
+                app:layout_constraintStart_toEndOf="@+id/textView_current_color_create"
+                app:layout_constraintTop_toTopOf="@+id/textView_current_color_create" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
