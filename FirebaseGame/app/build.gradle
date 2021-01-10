@@ -3,6 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'com.google.gms.google-services'
+apply from: '../app/git.gradle'
+
+def tag = getLastTag()
+def patch = getPatch()
 
 android {
     compileSdkVersion 30
@@ -12,8 +16,8 @@ android {
         applicationId "by.bsuir.firebasegame"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode generateVersionCode(tag , patch)
+        versionName "${tag}.${patch}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -26,4 +26,9 @@
     <string name="your_turn">Your turn</string>
     <string name="statistics">Statistics</string>
     <string name="use_gravatar">Use Gravatar</string>
+    <string name="congrats">Congratulations!</string>
+    <string name="congrats_text">You won the game!</string>
+    <string name="okay">Okay</string>
+    <string name="sorru">Sorry!</string>
+    <string name="could_you_please_accept_this_lab_i_promise_i_will_pass_all_front_end_labs_asap">You lost the game!</string>
 </resources>

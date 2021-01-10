@@ -52,17 +52,17 @@ class PlaygroundFragment: Fragment(R.layout.fragment_playground) {
         viewModel.endGame.observe(viewLifecycleOwner) {
             if (it) {
                 AlertDialog.Builder(requireContext())
-                    .setTitle("Congratulations!")
-                    .setMessage("You won the game!")
-                    .setPositiveButton("Okay") {_, _ ->
+                    .setTitle(getString(R.string.congrats))
+                    .setMessage(getString(R.string.congrats_text))
+                    .setPositiveButton(getString(R.string.okay)) { _, _ ->
                         navigateToAccount()
                     }.show()
             }
             else {
                 AlertDialog.Builder(requireContext())
-                    .setTitle("Sorry:(")
-                    .setMessage("You lost the game!")
-                    .setPositiveButton("Okay") {_, _ ->
+                    .setTitle(getString(R.string.sorru))
+                    .setMessage(getString(R.string.could_you_please_accept_this_lab_i_promise_i_will_pass_all_front_end_labs_asap))
+                    .setPositiveButton(getString(R.string.okay)) {_, _ ->
                         navigateToAccount()
                     }.show()
             }

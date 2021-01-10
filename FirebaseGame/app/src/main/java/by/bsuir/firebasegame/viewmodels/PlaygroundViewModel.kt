@@ -20,7 +20,7 @@ class PlaygroundViewModel: ViewModel(){
 
     fun startGame(id: String, role: Role)  {
 
-        val fuckingGameListener = object : PlaygroundListeners {
+        val gameListener = object : PlaygroundListeners {
             override fun cellChanged(row: Int, col: Int, symbol: String) {
                 val list = mutableListOf<MutableList<String>>()
                 list.addAll(gameArea.value!!)
@@ -43,8 +43,8 @@ class PlaygroundViewModel: ViewModel(){
         }
 
         behaviour = when(role) {
-            Role.Host -> HostBehaviour(id, fuckingGameListener)
-            Role.Guest -> ClientBehaviour(id, fuckingGameListener)
+            Role.Host -> HostBehaviour(id, gameListener)
+            Role.Guest -> ClientBehaviour(id, gameListener)
         }
     }
 

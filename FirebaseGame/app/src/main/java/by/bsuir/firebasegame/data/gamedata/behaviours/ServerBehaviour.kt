@@ -1,11 +1,9 @@
 package by.bsuir.firebasegame.data.gamedata.behaviours
 
-import android.util.Log
 import by.bsuir.firebasegame.data.gamedata.utilities.ClientMarkAction
 import by.bsuir.firebasegame.data.gamedata.utilities.PlaygroundListeners
 import by.bsuir.firebasegame.data.viewdata.Profile
 import by.bsuir.firebasegame.data.viewdata.Stat
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -19,7 +17,7 @@ class HostBehaviour(
     override val symbol: String
         get() = "X"
 
-    private var field = MutableList(3) { MutableList(3) {""} }
+    private var area = MutableList(3) { MutableList(3) {""} }
 
     private var hostNickname: String = ""
     private var guestId : String = ""
@@ -33,7 +31,7 @@ class HostBehaviour(
                     return
                 val action = snapshot.getValue<ClientMarkAction>()
                 action?.let {
-                    if (field[it.row][it.col].isEmpty()) {
+                    if (area[it.row][it.col].isEmpty()) {
                         markCell(it.row, it.col, it.symbol)
                         changeTurn(hostId)
                     }
@@ -219,7 +217,7 @@ class HostBehaviour(
     }
 
     override fun placeSymbol(row: Int, col: Int) {
-        if(field[row][col].isEmpty()){
+        if(area[row][col].isEmpty()){
             markCell(row, col, symbol)
             changeTurn(guestId)
         }
@@ -227,9 +225,9 @@ class HostBehaviour(
 
 
     private fun markCell(row : Int, col : Int, symbol : String){
-        field[row][col] = symbol
+        area[row][col] = symbol
         listener.cellChanged(row, col, symbol)
-        refGame.child(webservice.gameArea).setValue(field)
+        refGame.child(webservice.gameArea).setValue(area)
         checkGameState()
     }
 

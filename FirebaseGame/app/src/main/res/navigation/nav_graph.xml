@@ -95,7 +95,8 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_createRoomFragment_to_playgroundFragment"
-            app:destination="@id/playgroundFragment" />
+            app:destination="@id/playgroundFragment"
+            app:popUpTo="@id/accountFragment" />
     </fragment>
     <fragment
         android:id="@+id/joinRoomFragment"
@@ -104,7 +105,8 @@
         tools:layout="@layout/fragment_join_room" >
         <action
             android:id="@+id/action_joinRoomFragment_to_createRoomFragment"
-            app:destination="@id/createRoomFragment" />
+            app:destination="@id/createRoomFragment"
+            app:popUpTo="@id/accountFragment" />
         <argument
             android:name="profile"
             app:argType="by.bsuir.firebasegame.data.viewdata.Profile"
@@ -118,7 +120,8 @@
         tools:layout="@layout/fragment_playground" >
         <action
             android:id="@+id/action_playgroundFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
+            app:destination="@id/accountFragment"
+            app:popUpTo="@id/nav_graph" />
         <argument
             android:name="gameid"
             app:argType="string" />

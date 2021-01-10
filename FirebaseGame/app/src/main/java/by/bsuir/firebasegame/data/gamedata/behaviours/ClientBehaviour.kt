@@ -29,7 +29,6 @@ class ClientBehaviour(
                 }
 
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }

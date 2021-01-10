@@ -47,7 +47,7 @@ class RoomViewModel : ViewModel() {
                 roomReference.child(room.roomId).addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val changedRoom = snapshot.getValue<Room>()
-                        host.value = changedRoom?.host //ToDO: implement back button logic
+                        host.value = changedRoom?.host
                         guest.value = changedRoom?.guest
 
                         startGameEnabled.value = changedRoom?.host?.id?.isNotEmpty() == true
@@ -122,7 +122,7 @@ class RoomViewModel : ViewModel() {
 
 
         val gameRef = webservice.database.getReference(webservice.playgroundsPath).child(randomId)
-            .child("game")
+            .child(webservice.gamePath)
         progress.value = true
         gameRef.setValue(playground)
             .addOnSuccessListener {

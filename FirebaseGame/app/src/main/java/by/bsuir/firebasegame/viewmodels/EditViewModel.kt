@@ -39,7 +39,7 @@ class EditViewModel : ViewModel() {
     }
 
 
-    fun createOrEditProfile() { //TODO : Implement starting unknown avatar picture
+    fun createOrEditProfile() {
         val nick = nickname.value ?: ""
 
         if (nick.isNotEmpty()) {
